@@ -12,8 +12,6 @@ services:
       - rabbitmq01-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
-    restart_policy:
-      condition: on-failure
     deploy:
       mode: global
       placement:
@@ -32,8 +30,6 @@ services:
       - rabbitmq02-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
-    restart_policy:
-      condition: on-failure
     deploy:
       mode: global
       placement:
@@ -53,8 +49,6 @@ services:
       - rabbitmq03-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
-    restart_policy:
-      condition: on-failure
     deploy:
       mode: global
       placement:
@@ -72,8 +66,6 @@ services:
       - 15672:15672
       - 5672:5672
 #      - 1936:1936
-    restart_policy:
-      condition: on-failure
     deploy:
       mode: global
 
