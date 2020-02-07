@@ -1,0 +1,76 @@
+version: '3.3'
+
+services:
+  rabbitmq01:
+    image: rabbitmq:3-management
+    hostname: rabbitmq01
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+      - RABBITMQ_ERLANG_COOKIE='aaedfa50e07586626729da54e4cf002804b88c3a4e69442d1ea5ec27eadfaa63'
+    volumes:
+      - rabbitmq01-data:/var/lib/rabbitmq
+    networks:
+      - rabbitmq-backend
+
+  rabbitmq02:
+    image: rabbitmq:3-management
+    hostname: rabbitmq02
+    depends_on:
+      - rabbitmq01
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+      - RABBITMQ_ERLANG_COOKIE='aaedfa50e07586626729da54e4cf002804b88c3a4e69442d1ea5ec27eadfaa63'
+    volumes:
+      - rabbitmq02-data:/var/lib/rabbitmq
+    networks:
+      - rabbitmq-backend
+
+  rabbitmq03:
+    image: rabbitmq:3-management
+    hostname: rabbitmq03
+    depends_on:
+      - rabbitmq01
+      - rabbitmq02
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+      - RABBITMQ_ERLANG_COOKIE='aaedfa50e07586626729da54e4cf002804b88c3a4e69442d1ea5ec27eadfaa63'
+    volumes:
+      - rabbitmq03-data:/var/lib/rabbitmq
+    networks:
+      - rabbitmq-backend
+
+  rabbitmq-haproxy:
+    image: haproxy:2.1-alpine
+    configs:
+      - source: haproxy_config
+        target: /usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - rabbitmq-backend
+      - rabbitmq-frontend
+    ports:
+      - 15672:15672
+      - 5672:5672
+#      - 1936:1936
+    deploy:
+      mode: global
+
+volumes:
+  rabbitmq01-data:
+   driver: local
+  rabbitmq02-data:
+    driver: local
+  rabbitmq03-data:
+    driver: local
+
+configs:
+  haproxy_config:
+    file: ./configs/haproxy.cfg
+
+networks:
+  rabbitmq-backend:
+    external: true
+  rabbitmq-frontend:
+    external: true
