@@ -19,7 +19,7 @@
     make status
 ```
 
-5. Connect to any node to 
+5. Connect to any node
 ```
     amqp://user:password@node-ip
     http://node-ip:15672/
