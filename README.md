@@ -12,6 +12,8 @@
     docker node update --label-add rabbitmq02=true node-2
     docker node update --label-add rabbitmq03=true node-3
 
+bash```
+
 3. Run
 
     make up
