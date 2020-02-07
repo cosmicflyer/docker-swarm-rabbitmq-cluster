@@ -25,12 +25,12 @@
     http://node-ip:15672/
 ```
 
-5. Stop
+6. Stop
 ```
     make down
 ```
 
-6. Test
+7. Test
 ```
     docker run -it --rm pivotalrabbitmq/perf-test:latest --uri amqp://user:password@node-ip
 ```
