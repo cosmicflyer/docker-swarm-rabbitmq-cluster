@@ -12,6 +12,10 @@ services:
       - rabbitmq01-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq01 == true]
 
   rabbitmq02:
     image: rabbitmq:3-management
@@ -26,6 +30,10 @@ services:
       - rabbitmq02-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq02 == true]
 
   rabbitmq03:
     image: rabbitmq:3-management
@@ -41,6 +49,10 @@ services:
       - rabbitmq03-data:/var/lib/rabbitmq
     networks:
       - rabbitmq-backend
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq03 == true]
 
   rabbitmq-haproxy:
     image: haproxy:2.1-alpine
