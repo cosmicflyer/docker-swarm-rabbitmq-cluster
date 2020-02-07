@@ -3,14 +3,11 @@
 1. Change rabbitmq user/password in docker-stack-rabbitmq.yml (rabbitmq/rabbitmq by default).
 
 2. Add labels to nodes: 
-
-```bash
-
+```
     docker node update --label-add rabbitmq01=true node-1
     docker node update --label-add rabbitmq02=true node-2
     docker node update --label-add rabbitmq03=true node-3
-
-```bash
+```
 
 3. Run
 
