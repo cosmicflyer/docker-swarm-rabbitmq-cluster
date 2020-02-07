@@ -10,22 +10,27 @@
 ```
 
 3. Run
-
+```
     make up
-    
-4. Check status 
+```
 
+4. Check status 
+```
     make status
+```
 
 5. Connect to any node to 
-
+```
     amqp://user:password@node-ip
     http://node-ip:15672/
+```
 
 5. Stop
-
+```
     make down
-    
-6. Test
+```
 
+6. Test
+```
     docker run -it --rm pivotalrabbitmq/perf-test:latest --uri amqp://rabbitmq:rabbitmq@node-ip
+```
